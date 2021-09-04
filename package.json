@@ -1,0 +1,23 @@
+{
+  "name": "vacinometro_araraquara",
+  "version": "1.0.0",
+  "description": "Tweeting about vaccination in Araraquara",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/addoneto/araraquara-vaccines.git"
+  },
+  "author": "addo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/addoneto/araraquara-vaccines.git/issues"
+  },
+  "homepage": "https://github.com/addoneto/araraquara-vaccines.git#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "twitter": "^1.7.1"
+  }
+}
