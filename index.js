@@ -19,7 +19,7 @@ let previousData = [];
 
 function getData(date){
     let month = (date.getMonth()  + 1).toString();
-    let day   = (date.getDate()   - 1).toString();
+    let day   = (date.getDate()      ).toString();
 
     month = month.length === 1 ? '0' + month : month;
     day   = day.length === 1   ? '0' + day : day;
@@ -36,9 +36,9 @@ function getData(date){
         const request = https.request(options, res => {
             res.on('data', data => csvData += data);
             res.on('end' , ()   => { 
-                resolve(csvData)
                 console.log('\x1b[32m%s\x1b[0m',
                     'Data fetched from: \n' + HOST + options.path);
+                resolve(csvData);
             });
         });
 
@@ -56,6 +56,8 @@ function parseData(resp){
         data.push(resp.substr(lastIndex, 25));
     }
 
+    data.splice(1,1); // PROVISORY: remove 3rd dose
+
     for(let d of data){
         let newD = d.split(";");
         newD = newD[newD.length - 1].split('\r');
@@ -70,7 +72,7 @@ function calcVaccinationRates(data){
     firstDose  = Number(data[2]);
     secondDose = Number(data[1]);
 
-    if(!isNewData(singleDose, firstDose, secondDose)) return;
+    // if(!isNewData(singleDose, firstDose, secondDose)) return;
 
     sglDPercent = (singleDose * 100 / POPULATION).toFixed(2);
     fstDPercent = (firstDose  * 100 / POPULATION).toFixed(2);
@@ -128,4 +130,4 @@ function update(){
 }
 
 update();
-setInterval(update, 1000 * 60 * 60 * 24);
+// setInterval(update, 1000 * 60 * 60 * 24);
